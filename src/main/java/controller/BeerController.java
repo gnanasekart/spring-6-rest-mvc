@@ -3,8 +3,9 @@ package controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import model.Beer;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import services.BeerService;
 
@@ -14,15 +15,17 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@RequestMapping("/api/v1/beer")
 public class BeerController {
     private final BeerService beerService;
 
-    @RequestMapping("/api/v1/beer")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Beer> listBeers(){
         return beerService.listBeers();
     }
 
-    public Beer getBeerById(UUID uuid){
+    @RequestMapping(value = "{uuid}", method = RequestMethod.GET)
+    public Beer getBeerById(@PathVariable("uuid") UUID uuid){
         log.debug("getBeerById from Controller");
         return beerService.getBeerById(uuid);
     }

@@ -16,7 +16,7 @@ public class BeerServiceImpl implements BeerService{
     private Map<UUID, Beer> beerMap;
 
     public BeerServiceImpl() {
-        this.beerMap = new HashMap<UUID,Beer>();
+        this.beerMap = new HashMap<>();
 
         Beer beer1 = Beer.builder()
                 .id(UUID.randomUUID())
