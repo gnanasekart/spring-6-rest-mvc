@@ -1,9 +1,11 @@
 package services;
 
+import ch.qos.logback.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import model.Beer;
 import model.BeerStyle;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -105,5 +107,30 @@ public class BeerServiceImpl implements BeerService{
     @Override
     public void deleteBeerById(UUID uuid) {
         beerMap.remove(uuid);
+    }
+
+    @Override
+    public void patchBeerById(UUID uuid, Beer beer) {
+        Beer existing = beerMap.get(uuid);
+
+        if (StringUtils.hasText(beer.getBeerName())) {
+            existing.setBeerName(beer.getBeerName());
+        }
+
+        if (beer.getBeerStyle()!= null) {
+            existing.setBeerStyle(beer.getBeerStyle());
+        }
+
+        if (StringUtils.hasText(beer.getUpc())) {
+            existing.setUpc(beer.getUpc());
+        }
+
+        if (beer.getPrice()!= null) {
+            existing.setPrice(beer.getPrice());
+        }
+
+        if (beer.getQtyOnHand()!= null) {
+            existing.setQtyOnHand(beer.getQtyOnHand());
+        }
     }
 }

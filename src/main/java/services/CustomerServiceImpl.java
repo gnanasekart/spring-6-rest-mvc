@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import model.Customer;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
@@ -69,5 +70,23 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public void deleteCustomer(UUID uuid) {
         customerMap.remove(uuid);
+    }
+
+    @Override
+    public void patchCustomer(Customer customer, UUID id) {
+
+        Customer existingCustomer = customerMap.get(id);
+
+        if(StringUtils.hasText(customer.getCustomerName())) {
+            existingCustomer.setCustomerName(customer.getCustomerName());
+        }
+
+        if(StringUtils.hasText(customer.getPhno())) {
+            existingCustomer.setPhno(customer.getPhno());
+        }
+
+        if(customer.getRewardPoints()!= null) {
+            existingCustomer.setRewardPoints(customer.getRewardPoints());
+        }
     }
 }
