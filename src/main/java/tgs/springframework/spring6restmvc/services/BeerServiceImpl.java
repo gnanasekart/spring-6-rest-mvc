@@ -1,9 +1,8 @@
-package services;
+package tgs.springframework.spring6restmvc.services;
 
-import ch.qos.logback.core.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import model.Beer;
-import model.BeerStyle;
+import tgs.springframework.spring6restmvc.model.Beer;
+import tgs.springframework.spring6restmvc.model.BeerStyle;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -90,7 +89,7 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
-    public Beer updateBeerById(UUID uuid, Beer beer) {
+    public void updateBeerById(UUID uuid, Beer beer) {
         Beer existingBeer = beerMap.get(uuid);
 
         existingBeer.setBeerName(beer.getBeerName());
@@ -99,9 +98,6 @@ public class BeerServiceImpl implements BeerService{
         existingBeer.setPrice(beer.getPrice());
         existingBeer.setQtyOnHand(beer.getQtyOnHand());
         existingBeer.setUpdateDate(LocalDateTime.now());
-
-        beerMap.put(existingBeer.getId(), existingBeer);
-        return existingBeer;
     }
 
     @Override

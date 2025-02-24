@@ -1,26 +1,19 @@
-package services;
+package tgs.springframework.spring6restmvc.services;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import model.Customer;
+import tgs.springframework.spring6restmvc.model.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-@Slf4j
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
     public Map<UUID, Customer> customerMap;
 
     public CustomerServiceImpl() {
-        customerMap = Map.of();
+        customerMap = new HashMap<UUID, Customer>();
 
         Customer customer1 = Customer.builder()
                 .id(UUID.randomUUID())
@@ -56,15 +49,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer updateCustomer(Customer customer, UUID id) {
+    public void updateCustomer(Customer customer, UUID id) {
         Customer existingCustomer = customerMap.get(id);
         if (existingCustomer!= null) {
             existingCustomer.setCustomerName(customer.getCustomerName());
             existingCustomer.setPhno(customer.getPhno());
             existingCustomer.setRewardPoints(customer.getRewardPoints());
         }
-        customerMap.put(existingCustomer.getId(), existingCustomer);
-        return existingCustomer;
     }
 
     @Override

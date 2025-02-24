@@ -1,4 +1,4 @@
-package model;
+package tgs.springframework.spring6restmvc.model;
 
 import lombok.Builder;
 import lombok.Data;

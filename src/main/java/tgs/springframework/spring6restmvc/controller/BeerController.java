@@ -1,14 +1,14 @@
-package controller;
+package tgs.springframework.spring6restmvc.controller;
 
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import model.Beer;
+import tgs.springframework.spring6restmvc.model.Beer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.BeerService;
+import tgs.springframework.spring6restmvc.services.BeerService;
 
 import java.util.List;
 import java.util.UUID;

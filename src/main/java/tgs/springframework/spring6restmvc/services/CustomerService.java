@@ -1,7 +1,6 @@
-package services;
+package tgs.springframework.spring6restmvc.services;
 
-import model.Beer;
-import model.Customer;
+import tgs.springframework.spring6restmvc.model.Customer;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +13,7 @@ public interface CustomerService {
 
     Customer saveNewCustomer(Customer customer);
 
-    Customer updateCustomer(Customer customer, UUID id);
+    void updateCustomer(Customer customer, UUID id);
 
     void deleteCustomer(UUID uuid);
 
