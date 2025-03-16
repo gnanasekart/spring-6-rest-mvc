@@ -14,6 +14,7 @@ import tgs.springframework.spring6restmvc.model.Beer;
 import tgs.springframework.spring6restmvc.services.BeerService;
 import tgs.springframework.spring6restmvc.services.BeerServiceImpl;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +51,7 @@ public class BeerControllerMockMvcTest {
     void getBeerById() throws Exception {
         Beer testBeer = beerServiceImpl.listBeers().getFirst();
 
-        given(beerService.getBeerById(any(UUID.class))).willReturn(testBeer);
+        given(beerService.getBeerById(any(UUID.class))).willReturn(Optional.of(testBeer));
 
         mvc.perform(get("/api/v1/beer/" + UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON))
@@ -93,7 +94,7 @@ public class BeerControllerMockMvcTest {
 
     @Test
     void getBeerByIdNotFound() throws Exception {
-        given(beerService.getBeerById(any(UUID.class))).willThrow(NotFoundException.class);
+        given(beerService.getBeerById(any(UUID.class))).willReturn(Optional.empty());
 
         mvc.perform(get("/api/v1/beer/" + UUID.randomUUID()))
                 .andExpect(status().isNotFound());

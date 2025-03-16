@@ -3,13 +3,14 @@ package tgs.springframework.spring6restmvc.services;
 import tgs.springframework.spring6restmvc.model.Beer;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface BeerService {
 
     List<Beer> listBeers();
 
-    Beer getBeerById(UUID uuid);
+    Optional<Beer> getBeerById(UUID uuid);
 
     Beer saveNewBeer(Beer beer);
 
