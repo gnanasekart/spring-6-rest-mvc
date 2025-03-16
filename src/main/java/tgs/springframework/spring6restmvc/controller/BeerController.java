@@ -16,22 +16,29 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/beer")
+//@RequestMapping("/api/v1/beer")
 public class BeerController {
     private final BeerService beerService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    public static final String BEER_PATH = "/api/v1/beer";
+    public static final String BEER_PATH_ID = BEER_PATH + "/{uuid}";
+
+    //@RequestMapping(method = RequestMethod.GET)
+    @GetMapping(value = BEER_PATH)
     public List<Beer> listBeers(){
         return beerService.listBeers();
     }
 
-    @RequestMapping(value = "{uuid}", method = RequestMethod.GET)
+    //@RequestMapping(value = "{uuid}", method = RequestMethod.GET)
+
+    @GetMapping(value = BEER_PATH)
     public Beer getBeerById(@PathVariable("uuid") UUID uuid){
         log.debug("getBeerById from Controller - 1234678");
         return beerService.getBeerById(uuid);
     }
 
-    @PostMapping
+    //@PostMapping
+    @PostMapping(BEER_PATH)
     public ResponseEntity handlePost(@RequestBody Beer beer){
         Beer beerNew = beerService.saveNewBeer(beer);
         HttpHeaders header = new HttpHeaders();
@@ -39,19 +46,20 @@ public class BeerController {
         return new ResponseEntity(header, HttpStatus.CREATED);
     }
 
-    @PutMapping("{uuid}")
+    @PutMapping(BEER_PATH_ID)
     public ResponseEntity updateById(@PathVariable("uuid") UUID uuid, @RequestBody Beer beer){
         beerService.updateBeerById(uuid, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("{uuid}")
+    @DeleteMapping(BEER_PATH_ID)
+    //@DeleteMapping("{uuid}")
     public ResponseEntity deleteById(@PathVariable("uuid") UUID uuid){
         beerService.deleteBeerById(uuid);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("{uuid}")
+    @PatchMapping(BEER_PATH_ID)
     public ResponseEntity patchBeerById(@PathVariable("uuid") UUID uuid, @RequestBody Beer beer){
         beerService.patchBeerById(uuid, beer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
