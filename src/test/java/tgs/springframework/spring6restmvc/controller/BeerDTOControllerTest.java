@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.UUID;
 
 @SpringBootTest
-class BeerControllerTest {
+class BeerDTOControllerTest {
 
     @Autowired
     BeerController beerController;
