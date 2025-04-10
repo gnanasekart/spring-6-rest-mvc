@@ -2,7 +2,7 @@ package tgs.springframework.spring6restmvc.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import tgs.springframework.spring6restmvc.model.Customer;
+import tgs.springframework.spring6restmvc.model.CustomerDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +20,32 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Customer> listCustomer(){
+    public List<CustomerDTO> listCustomer(){
         //log.info("Request to fetch all customers");
         return customerService.listCustomer();
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable UUID id){
+    public CustomerDTO getCustomerById(@PathVariable UUID id){
         //log.info("Request to fetch customer by id: {}", id);
         return customerService.getCustomerById(id);
     }
 
     @PostMapping
-    public ResponseEntity createCustomer(@RequestBody Customer customer){
+    public ResponseEntity createCustomer(@RequestBody CustomerDTO customerDTO){
         //log.info("Request to create new customer: {}", customer);
-        Customer newCustomer = customerService.saveNewCustomer(customer);
+        CustomerDTO newCustomerDTO = customerService.saveNewCustomer(customerDTO);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/v1/customer/" + customer.getId().toString());
+        headers.add("Location", "/api/v1/customer/" + customerDTO.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity updateCustomer(@RequestBody Customer customer, @PathVariable UUID id){
+    public ResponseEntity updateCustomer(@RequestBody CustomerDTO customerDTO, @PathVariable UUID id){
         //log.info("Request to update customer by id: {}, new data: {}", id, customer);
-         customerService.updateCustomer(customer, id);
+         customerService.updateCustomer(customerDTO, id);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -60,9 +60,9 @@ public class CustomerController {
 
 
     @PatchMapping("{id}")
-    public ResponseEntity patchCustomer(@RequestBody Customer customer, @PathVariable UUID id){
+    public ResponseEntity patchCustomer(@RequestBody CustomerDTO customerDTO, @PathVariable UUID id){
         //log.info("Request to patch update customer by id: {}, new data: {}", id, customer);
-        customerService.patchCustomer(customer, id);
+        customerService.patchCustomer(customerDTO, id);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

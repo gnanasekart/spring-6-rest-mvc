@@ -1,6 +1,6 @@
 package tgs.springframework.spring6restmvc.services;
 
-import tgs.springframework.spring6restmvc.model.Customer;
+import tgs.springframework.spring6restmvc.model.CustomerDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -10,51 +10,51 @@ import java.util.*;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
-    public Map<UUID, Customer> customerMap;
+    public Map<UUID, CustomerDTO> customerMap;
 
     public CustomerServiceImpl() {
-        customerMap = new HashMap<UUID, Customer>();
+        customerMap = new HashMap<UUID, CustomerDTO>();
 
-        Customer customer1 = Customer.builder()
+        CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .id(UUID.randomUUID())
                 .customerName("sekar")
                 .phno("123456")
                 .rewardPoints(BigDecimal.valueOf(23.11))
                 .build();
 
-        customerMap.put(customer1.getId(), customer1);
+        customerMap.put(customerDTO1.getId(), customerDTO1);
     }
 
     @Override
-    public List<Customer> listCustomer() {
+    public List<CustomerDTO> listCustomer() {
         return new ArrayList<>(customerMap.values());
     }
 
     @Override
-    public Customer getCustomerById(UUID uuid) {
+    public CustomerDTO getCustomerById(UUID uuid) {
         return customerMap.get(uuid);
     }
 
     @Override
-    public Customer saveNewCustomer(Customer customer) {
-        Customer newCustomer = Customer.builder()
+    public CustomerDTO saveNewCustomer(CustomerDTO customerDTO) {
+        CustomerDTO newCustomerDTO = CustomerDTO.builder()
                 .id(UUID.randomUUID())
-                .customerName(customer.getCustomerName())
-                .phno(customer.getPhno())
-                .rewardPoints(customer.getRewardPoints())
+                .customerName(customerDTO.getCustomerName())
+                .phno(customerDTO.getPhno())
+                .rewardPoints(customerDTO.getRewardPoints())
                 .build();
 
-        customerMap.put(newCustomer.getId(), newCustomer);
-        return newCustomer;
+        customerMap.put(newCustomerDTO.getId(), newCustomerDTO);
+        return newCustomerDTO;
     }
 
     @Override
-    public void updateCustomer(Customer customer, UUID id) {
-        Customer existingCustomer = customerMap.get(id);
-        if (existingCustomer!= null) {
-            existingCustomer.setCustomerName(customer.getCustomerName());
-            existingCustomer.setPhno(customer.getPhno());
-            existingCustomer.setRewardPoints(customer.getRewardPoints());
+    public void updateCustomer(CustomerDTO customerDTO, UUID id) {
+        CustomerDTO existingCustomerDTO = customerMap.get(id);
+        if (existingCustomerDTO != null) {
+            existingCustomerDTO.setCustomerName(customerDTO.getCustomerName());
+            existingCustomerDTO.setPhno(customerDTO.getPhno());
+            existingCustomerDTO.setRewardPoints(customerDTO.getRewardPoints());
         }
     }
 
@@ -64,20 +64,20 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void patchCustomer(Customer customer, UUID id) {
+    public void patchCustomer(CustomerDTO customerDTO, UUID id) {
 
-        Customer existingCustomer = customerMap.get(id);
+        CustomerDTO existingCustomerDTO = customerMap.get(id);
 
-        if(StringUtils.hasText(customer.getCustomerName())) {
-            existingCustomer.setCustomerName(customer.getCustomerName());
+        if(StringUtils.hasText(customerDTO.getCustomerName())) {
+            existingCustomerDTO.setCustomerName(customerDTO.getCustomerName());
         }
 
-        if(StringUtils.hasText(customer.getPhno())) {
-            existingCustomer.setPhno(customer.getPhno());
+        if(StringUtils.hasText(customerDTO.getPhno())) {
+            existingCustomerDTO.setPhno(customerDTO.getPhno());
         }
 
-        if(customer.getRewardPoints()!= null) {
-            existingCustomer.setRewardPoints(customer.getRewardPoints());
+        if(customerDTO.getRewardPoints()!= null) {
+            existingCustomerDTO.setRewardPoints(customerDTO.getRewardPoints());
         }
     }
 }

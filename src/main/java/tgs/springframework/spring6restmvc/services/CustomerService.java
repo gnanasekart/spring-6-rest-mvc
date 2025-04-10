@@ -1,21 +1,21 @@
 package tgs.springframework.spring6restmvc.services;
 
-import tgs.springframework.spring6restmvc.model.Customer;
+import tgs.springframework.spring6restmvc.model.CustomerDTO;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
 
-    List<Customer> listCustomer();
+    List<CustomerDTO> listCustomer();
 
-    Customer getCustomerById(UUID uuid);
+    CustomerDTO getCustomerById(UUID uuid);
 
-    Customer saveNewCustomer(Customer customer);
+    CustomerDTO saveNewCustomer(CustomerDTO customerDTO);
 
-    void updateCustomer(Customer customer, UUID id);
+    void updateCustomer(CustomerDTO customerDTO, UUID id);
 
     void deleteCustomer(UUID uuid);
 
-    void patchCustomer(Customer customer, UUID id);
+    void patchCustomer(CustomerDTO customerDTO, UUID id);
 }
