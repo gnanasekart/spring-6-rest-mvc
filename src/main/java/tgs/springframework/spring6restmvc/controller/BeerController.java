@@ -1,7 +1,7 @@
 package tgs.springframework.spring6restmvc.controller;
 
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import tgs.springframework.spring6restmvc.model.BeerDTO;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/beer")
 public class BeerController {

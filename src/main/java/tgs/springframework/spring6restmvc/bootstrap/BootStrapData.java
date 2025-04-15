@@ -11,7 +11,6 @@ import tgs.springframework.spring6restmvc.repositories.CustomerRepository;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -20,8 +19,7 @@ public class BootStrapData implements CommandLineRunner {
     public final BeerRepository beerRepository;
     public final CustomerRepository customerRepository;
 
-    public void run(String... args) throws Exception {
-
+    public void run(String... args) {
         loadBeerData();
         loadCustomerData();
     }

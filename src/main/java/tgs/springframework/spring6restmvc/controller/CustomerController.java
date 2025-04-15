@@ -16,7 +16,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
-
+    public static final String CUSTOMER_PATH = "/api/v1/customer";
+    public static final String CUSTOMER_PATH_ID = CUSTOMER_PATH + "/{customerId}";
     private final CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET)
