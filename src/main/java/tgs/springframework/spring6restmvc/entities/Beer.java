@@ -2,7 +2,6 @@ package tgs.springframework.spring6restmvc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 import tgs.springframework.spring6restmvc.model.BeerStyleDTO;
 
