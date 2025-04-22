@@ -9,6 +9,7 @@ import tgs.springframework.spring6restmvc.model.BeerDTO;
 import tgs.springframework.spring6restmvc.repositories.BeerRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +22,18 @@ class BeerControllerT {
 
     @Autowired
     BeerRepository beerRepository;
+
+    @Test
+    void getBeerById() {
+        BeerDTO beerDTO = beerController.getBeerById(beerRepository.findAll().getFirst().getId());
+        assertNotNull(beerDTO);
+        assertEquals(beerRepository.findAll().getFirst().getId(), beerDTO.getId());
+    }
+
+    @Test
+    void testGetBeerByIdNotFound() {
+        assertThrows(NotFoundException.class, () -> beerController.getBeerById(UUID.randomUUID()));
+    }
 
     @Test
     void testListBeers() {
