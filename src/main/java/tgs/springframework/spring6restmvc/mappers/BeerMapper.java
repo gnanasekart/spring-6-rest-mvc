@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import tgs.springframework.spring6restmvc.entities.Beer;
 import tgs.springframework.spring6restmvc.model.BeerDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface BeerMapper {
 
     BeerDTO beerToBeerDTO(Beer beer);
