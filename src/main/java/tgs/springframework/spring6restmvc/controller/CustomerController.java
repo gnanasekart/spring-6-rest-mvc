@@ -28,8 +28,7 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public CustomerDTO getCustomerById(@PathVariable UUID id){
-        //log.info("Request to fetch customer by id: {}", id);
-        return customerService.getCustomerById(id);
+        return customerService.getCustomerById(id).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping

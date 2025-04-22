@@ -8,6 +8,7 @@ import tgs.springframework.spring6restmvc.model.CustomerDTO;
 import tgs.springframework.spring6restmvc.repositories.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,12 +21,16 @@ public class CustomerServiceJPA implements CustomerService {
 
     @Override
     public List<CustomerDTO> listCustomer() {
-        return List.of();
+        return customerRepository.findAll()
+                .stream()
+                .map(customerMapper::customerToCustomerDTO)
+                .toList();
     }
 
     @Override
-    public CustomerDTO getCustomerById(UUID uuid) {
-        return null;
+    public Optional<CustomerDTO> getCustomerById(UUID uuid) {
+        return Optional.ofNullable(customerMapper.customerToCustomerDTO(customerRepository.findById(uuid)
+                .orElse(null)));
     }
 
     @Override
