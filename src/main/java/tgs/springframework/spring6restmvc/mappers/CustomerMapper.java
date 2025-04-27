@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import tgs.springframework.spring6restmvc.entities.Customer;
 import tgs.springframework.spring6restmvc.model.CustomerDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
      CustomerDTO customerToCustomerDTO(Customer customer);
